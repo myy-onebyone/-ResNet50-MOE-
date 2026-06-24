@@ -1,0 +1,13 @@
+# 优化后的模型配置
+# 最佳融合策略: max(L, R)
+# 优化后的阈值 (per-class):
+thresholds[正常] = 0.12
+thresholds[糖尿病] = 0.90
+thresholds[青光眼] = 0.68
+thresholds[白内障] = 0.14
+thresholds[AMD] = 0.82
+thresholds[高血压] = 0.64
+thresholds[近视] = 0.80
+thresholds[其他疾病/异常] = 0.84
+
+# 融合策略: max(L, R)

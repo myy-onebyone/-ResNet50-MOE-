@@ -1,0 +1,53 @@
+================================================================================
+  眼底疾病智能诊断系统 — 项目文件说明
+================================================================================
+
+【核心模型与训练】
+  mymodel.py               ResNet50 多标签分类模型定义 (ImageNet预训练+8类输出)
+  MoE_model.py             Mixture of Experts 双流门控融合模型 (8专家+门控网络)
+  train.py                 初次训练脚本 (BCEWithLogitsLoss, 50 epochs, 过采样)
+  train_rigorous.py        严谨训练脚本 (渐进式解冻/加权BCE/FocalLoss/早停)
+  train_all.py             全量数据训练 (三折交叉验证版本)
+  dataloader.py            数据集加载类 (ODIR-5K, 过采样, 数据增强)
+  best_resnet50.pth        训练好的 ResNet50 模型权重 (~94MB)
+  best_resnet50_test.pth   测试用模型权重
+
+【GUI 主程序】
+  main_window_compare.py   主界面 (PyQt5, 双模型对比+集成诊断+MATLAB量化分析)
+
+【图像处理与分析】
+  fundus_preprocess.py     眼底图像预处理模块 (CLAHE/高斯滤波/完整流水线+定量指标)
+  preprocess_analysis.py   预处理量化分析脚本 (生成对比图+Markdown报告)
+  matlab_style_analysis.py MATLAB风格量化分析引擎 (原图vs组合流水线对比, 中文化图表)
+
+【对比实验】
+  compare_experiment.py    ResNet50 vs MoE 对比实验主脚本
+  train_rigorous.py        严谨版对比训练 (含渐进式解冻策略)
+
+【测试与评估】
+  test_final.py            最终测试 (左右眼融合推理+多标签指标)
+  test_excel.py            批量Excel预测+结果导出
+  assess.py                模型评估 (混淆矩阵+逐类指标可视化)
+
+【数据预处理工具】
+  resize.py                图像尺寸调整
+  split.py                 数据集划分 (训练/验证/测试)
+  find.py                  文件查找工具
+  h5.py                    HDF5格式转换
+  sum.py                   标签分布统计
+
+【MATLAB 相关】
+  matlab_compare.m         MATLAB对比实验脚本
+  export_for_matlab.py     导出数据供MATLAB使用
+
+【输出目录】
+  data/                    数据集 (ODIR-5K眼底图像+标签CSV)
+  compare_results/         ResNet50 vs MoE 对比实验图表+权重+MATLAB数据
+  preprocess_analysis/     预处理量化分析图表 (3种方法对比)
+  analysis_output/         MATLAB风格分析图表 (原图vs组合流水线视觉+量化)
+
+【文档】
+  readme.md                项目说明
+  训练日志.md               50 epoch 训练过程记录
+  深度学习汇报.pptx          答辩PPT (21页, 背景/数据/方法/实验/应用)
+  optimized_config.txt     优化配置参数
